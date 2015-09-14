@@ -1,0 +1,48 @@
+<html>
+    <head>
+        <title>UV mapping</title>
+        <style>
+            body { margin: 0; }
+            canvas { width: 100%; height: 100% }
+        </style>
+    </head>
+    <body>
+        <script id="VertexShader" type="x-shader/x-vertex">
+
+// will be interpolated for each fragment
+varying vec2 v_uv;
+
+void main()
+{
+    // assign value given to us by THREE
+    v_uv = uv;
+
+    // apply mvp to position attribute and assign to output variable
+    gl_Position = projectionMatrix *
+                  modelViewMatrix *
+                  vec4(position,1.0);
+}
+
+        </script>
+        <script id="FragmentShader" type="x-shader/x-fragment">
+
+// handle to our only texture
+uniform sampler2D u_sides;
+
+// hardwre interpolated texture coordinate
+varying vec2 v_uv;
+
+void main()
+{
+    // sample color at position specified by v_uv
+    vec4 color = texture2D(u_sides, v_uv);
+
+    // assign sampled color to output variable
+    gl_FragColor = color;
+}
+
+        </script>
+        <script src="../lib/three.js"></script>
+        <script src="uvmapping.js"></script>
+    </body>
+</html>
