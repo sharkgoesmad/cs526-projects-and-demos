@@ -94,7 +94,7 @@ function init() {
     geometry.faceVertexUvs[0][11] = [ wood[1], wood[2], wood[3] ];
 
     mesh = new THREE.Mesh(geometry,  material);
-    mesh.position.z = -50;
+    mesh.position.z = -20;
     scene.add( mesh );
 
     renderer = new THREE.WebGLRenderer();
@@ -112,7 +112,7 @@ function init() {
 function animate() {
 
     mesh.rotation.x += .01;
-    mesh.rotation.y += .01;
+    mesh.rotation.y += .03;
 
     render();
     requestAnimationFrame( animate );
